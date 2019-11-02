@@ -1,4 +1,4 @@
-package com.example.iat359_finalproject;
+package com.example.milestone2;
 
 import org.junit.Test;
 
