@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReportActivity">
+
+
+
+    <ImageView
+        android:layout_width="1080px"
+        android:layout_height="663px"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/reportheader"
+
+        />
+
+    <ImageView
+        android:layout_width="1080px"
+        android:layout_height="1394px"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-60dp"
+        android:background="@drawable/reportdetail"
+
+        />
+
+
+</LinearLayout>
+</ScrollView>

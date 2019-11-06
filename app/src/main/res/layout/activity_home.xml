@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePage"
+    >
+
+
+
+        <ImageView
+        android:layout_width="1080px"
+        android:layout_height="255px"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/hello"
+        />
+
+
+    <ImageButton
+        android:id="@+id/search"
+        android:layout_width="810px"
+        android:layout_height="446px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/searchbutton"
+        android:onClick="Search" />
+
+
+    <ImageButton
+        android:id="@+id/user"
+        android:layout_width="242px"
+        android:layout_height="272px"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="270dp"
+        android:background="@drawable/head"
+        android:onClick="enterProfile" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="46dp"
+        android:fontFamily="sans-serif-bold"
+        android:text="Good Afternoon!"
+        android:textColor="#000000"
+        android:textSize="28dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="46dp"
+        android:fontFamily="sans-serif-bold"
+        android:text="Amy Cheung"
+        android:textColor="#000000"
+        android:textSize="28dp" />
+
+    <ImageButton
+        android:id="@+id/report"
+        android:layout_width="375px"
+        android:layout_height="367px"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="216dp"
+        android:background="@drawable/report"
+        android:onClick="enterReport" />
+
+
+
+
+    <ImageButton
+        android:id="@+id/badge"
+        android:layout_width="375px"
+        android:layout_height="367px"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/badge"
+        android:onClick="enterAchieve" />
+
+
+</RelativeLayout>
