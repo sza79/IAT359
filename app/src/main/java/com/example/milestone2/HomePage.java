@@ -19,7 +19,8 @@ public class HomePage extends AppCompatActivity {
 
 
     public void Search(View view){
-
+        Intent i = new Intent( this, ReportChoosing.class );
+        startActivity( i );
     }
 
     public void enterReport(View view){
