@@ -9,6 +9,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import java.util.Calendar;
+import java.util.Date;
 
 public class WalkingSpeedActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -18,6 +20,9 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
     private SensorManager mySensorManager;
 
     private long steps = 0;
+
+    private long previousTime = 0;
+    private long newTime = 0;
 
     //The step counter
     private Sensor stepCounter;
@@ -41,7 +46,6 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
         } catch (Exception e) {
             Log.i("wow", e.toString());
         }
-
 
     }
 
@@ -70,7 +74,31 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
             steps++;
         }
 
+        //Every 10 steps
+        if (steps % 10 == 0) {
+
+        }
+
         Log.i("wow", "Step : " + steps);
+        Date currentTime = Calendar.getInstance().getTime();
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        Log.i("wow", ts);
+
+
+        try {
+            if (steps == 1) {
+                newTime = System.currentTimeMillis() / 1000;
+            }
+
+            if (steps >= 10) {
+                previousTime = newTime;
+                newTime = System.currentTimeMillis() / 1000;
+                Log.i("wow", "Previous Time = " + previousTime + ", New Time = " + newTime);
+            }
+        } catch (Exception e) {
+            Log.i("wow", e.toString());
+        }
 
     }
 
