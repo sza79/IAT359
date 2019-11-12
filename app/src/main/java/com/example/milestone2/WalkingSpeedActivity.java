@@ -92,9 +92,11 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
             }
 
             if (steps >= 10) {
-                previousTime = newTime;
-                newTime = System.currentTimeMillis() / 1000;
-                Log.i("wow", "Previous Time = " + previousTime + ", New Time = " + newTime);
+                if (steps % 10 == 0) {
+                    previousTime = newTime;
+                    newTime = System.currentTimeMillis() / 1000;
+                    Log.i("wow", "Previous Time = " + previousTime + ", New Time = " + newTime);
+                }
             }
         } catch (Exception e) {
             Log.i("wow", e.toString());
