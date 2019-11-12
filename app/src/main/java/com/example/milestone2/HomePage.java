@@ -69,7 +69,8 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
         }
 
         if (v.getId() == R.id.monitorButton) {
-
+            Intent i = new Intent( this, WalkingSpeedActivity.class );
+            startActivity( i );
         }
     }
 }
