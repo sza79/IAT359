@@ -63,8 +63,6 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
             Log.i("wow", e.toString());
         }
 
-        v.vibrate(VibrationEffect.createOneShot(5000, VibrationEffect.DEFAULT_AMPLITUDE));
-
     }
 
     protected void onResume() {
