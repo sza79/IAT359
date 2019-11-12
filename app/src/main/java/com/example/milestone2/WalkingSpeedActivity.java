@@ -3,15 +3,18 @@ package com.example.milestone2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +22,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
-public class WalkingSpeedActivity extends AppCompatActivity implements SensorEventListener {
+public class WalkingSpeedActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
 
-    private TextView speedTextView;
+    private TextView speedTextView, linkToExternal;
     private ImageView walkingStatus;
 
     //Sensor Manager
@@ -52,6 +55,10 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
         speedTextView = findViewById(R.id.speedTextView);
 
         walkingStatus = findViewById(R.id.walkingStatus);
+
+        linkToExternal = findViewById(R.id.linkToExternal);
+        linkToExternal.setOnClickListener(this);
+
 
         //Instantiate SensorManager
         mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -136,5 +143,15 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.linkToExternal) {
+            String url = "https://blood.ca/en/blood/donating-blood/donation-process";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }
     }
 }

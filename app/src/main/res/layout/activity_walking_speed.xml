@@ -83,6 +83,17 @@
                 android:text="After donating, it is important to rest in the canteen area for at least ten minutes, or until you feel up to your usual self. Make sure you walk a little bit slower then usual for at leat 20 mins."
                 android:textAlignment="center"
                 android:textColor="#ffff" />
+
+            <TextView
+                android:id="@+id/linkToExternal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4sp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/learnMore"
+                android:textAlignment="center"
+                android:textColor="#ffff"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
