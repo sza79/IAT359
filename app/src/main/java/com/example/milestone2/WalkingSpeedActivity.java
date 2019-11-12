@@ -2,12 +2,16 @@ package com.example.milestone2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +19,7 @@ import java.util.Date;
 public class WalkingSpeedActivity extends AppCompatActivity implements SensorEventListener {
 
     private TextView speedTextView;
+    private ImageView walkingStatus;
 
     //Sensor Manager
     private SensorManager mySensorManager;
@@ -27,6 +32,9 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
     //The step counter
     private Sensor stepCounter;
 
+    //Vibrator Declaration
+    public Vibrator v;
+
     //SensorValues float Array to store the sensor values read
     private float[] rawSensorValues;
 
@@ -35,7 +43,12 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_speed);
 
+        //Initializing vibrater object
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         speedTextView = findViewById(R.id.speedTextView);
+
+        walkingStatus = findViewById(R.id.walkingStatus);
 
         //Instantiate SensorManager
         mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -96,6 +109,13 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
                     previousTime = newTime;
                     newTime = System.currentTimeMillis() / 1000;
                     Log.i("wow", "Previous Time = " + previousTime + ", New Time = " + newTime);
+                    long timeDifference = newTime - previousTime;
+                    if (timeDifference < 5) {
+                        walkingStatus.setImageResource(R.drawable.toofast);
+                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        walkingStatus.setImageResource(R.drawable.normal);
+                    }
                 }
             }
         } catch (Exception e) {
