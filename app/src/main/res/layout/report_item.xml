@@ -3,17 +3,31 @@
     android:id="@+id/reportItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/actionModeBackground"
-    android:orientation="horizontal">
+    android:background="@drawable/item_background"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/reportTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_black"
         android:paddingLeft="40dp"
         android:paddingTop="15dp"
         android:paddingRight="40dp"
+        android:text="Amy Cheng"
+        android:textColor="#C94A50"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/reportDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:paddingBottom="15dp"
+        android:text="2019-11-06 14:34:21"
+        android:textColor="#C94A50"
         android:textSize="20sp" />
 
 </LinearLayout>

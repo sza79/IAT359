@@ -10,9 +10,9 @@ import android.widget.Toast;
 public class MyHelper extends SQLiteOpenHelper {
     private Context context;
 
-    public static final String CREATE_TABLE =
+    public static final String CREATE_BLOODTABLE =
             "CREATE TABLE "+
-                    Constants.TABLE_NAME + " (" +
+                    Constants.BLOODTABLE_NAME + " (" +
                     Constants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     Constants.PATIENTNAME + " TEXT, " +
                     Constants.DATE + " TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
@@ -22,7 +22,17 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.HEPATITISA + " BOOLEAN, " +
                     Constants.HEPATITISB + " BOOLEAN);" ;
 
-    private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
+    public static final String CREATE_USERTABLE =
+            "CREATE TABLE "+
+                    Constants.USERTABLE_NAME + " (" +
+                    Constants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    Constants.PATIENTNAME + " TEXT, " +
+                    Constants.CARDNUM + " TEXT, " +
+                    Constants.SEX + " TEXT, " +
+                    Constants.AGE + " TEXT, " +
+                    Constants.PHONE + " TEXT);" ;
+
+    private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.BLOODTABLE_NAME;
 
     public MyHelper(Context context){
         super (context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
@@ -32,7 +42,8 @@ public class MyHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            db.execSQL(CREATE_TABLE);
+            db.execSQL(CREATE_BLOODTABLE);
+            db.execSQL(CREATE_USERTABLE);
             Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
             Log.d("wow", "table create attempted");
 

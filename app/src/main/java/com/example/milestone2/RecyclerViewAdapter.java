@@ -2,6 +2,7 @@ package com.example.milestone2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     public ArrayList<String> reportList;
+    public String currentSessionUsername;
 
-    public RecyclerViewAdapter(ArrayList<String> reportList) {
+    public RecyclerViewAdapter(ArrayList<String> reportList, String currentSessionUsername) {
         this.reportList = reportList;
+        this.currentSessionUsername = currentSessionUsername;
     }
 
     @NonNull
@@ -32,7 +35,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String bloodReportTitle = reportList.get(position);
         //Gonna have to do some splitToken afterwards here
-        holder.reportTitle.setText(bloodReportTitle);
+        String[] split = bloodReportTitle.split(",");
+        holder.reportTitle.setText(currentSessionUsername);
+        holder.reportDate.setText(split[1]);
         //Position is bind to the item, so that onClickListener knows which item is clicked
         //Used later to retrieve the clicked sensor
         holder.myPosition = position;
@@ -47,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         //Variables
-        TextView reportTitle;
+        TextView reportTitle, reportDate;
 
         //myPosition represents the position of this viewHolder within the RecyclerView
         public int myPosition;
@@ -58,7 +63,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //Constructor class
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+
+
             reportTitle = itemView.findViewById(R.id.reportTitle);
+            reportDate = itemView.findViewById(R.id.reportDate);
             context = itemView.getContext();
 
             //Setting up OnClickListener, to prepare for user to click on each viewHolder

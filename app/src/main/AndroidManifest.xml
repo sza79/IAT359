@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReportChoosing"></activity>
+        <activity android:name=".profileEditActivity"></activity>
+        <activity android:name=".ReportChoosing" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AchieveActivity" />
         <activity android:name=".ReportActivity" />
@@ -22,6 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

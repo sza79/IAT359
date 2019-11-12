@@ -1,8 +1,11 @@
 package com.example.milestone2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +13,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomePage extends AppCompatActivity {
 
+    private TextView usernameTextView;
+
+    public static final String DEFAULT = "not available";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        usernameTextView = findViewById(R.id.usernameTextView);
+
+        SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
+        String currentSessionUsername = prefs.getString( "CurrentSessionUsername", DEFAULT );
+
+        usernameTextView.setText(currentSessionUsername);
     }
 
 

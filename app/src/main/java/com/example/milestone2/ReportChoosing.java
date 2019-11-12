@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class ReportChoosing extends AppCompatActivity {
 
     private RecyclerView myRecyclerview;
 
-    private MyDatabase db;
+    private MyBloodReportDatabase bloodDb;
 
     //ArrayList for storing sensor name strings
     private ArrayList<String> reportList;
@@ -22,10 +23,15 @@ public class ReportChoosing extends AppCompatActivity {
     //RecyclerViewAdapter
     private RecyclerViewAdapter myAdapter;
 
+    private String currentSessionUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_choosing);
+
+        SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
+        currentSessionUsername = prefs.getString( "CurrentSessionUsername", "Not Available" );
 
         //RecyclerView UI Item
         myRecyclerview = findViewById(R.id.reportRecyclerView);
@@ -34,8 +40,8 @@ public class ReportChoosing extends AppCompatActivity {
         reportList = new ArrayList<>();
 
         //Retrieve reportList entries from database
-        db = new MyDatabase(this);
-        Cursor cursor = db.getReportsByName("MyNameIsWOW");
+        bloodDb = new MyBloodReportDatabase(this);
+        Cursor cursor = bloodDb.getReportsByName("MyNameIsWOW");
 
         int index1 = cursor.getColumnIndex(Constants.PATIENTNAME);
         int index2 = cursor.getColumnIndex(Constants.DATE);
@@ -68,7 +74,7 @@ public class ReportChoosing extends AppCompatActivity {
 
 
         //RecyclerView Adapter Instantiation with the ArrayList
-        myAdapter = new RecyclerViewAdapter(reportList);
+        myAdapter = new RecyclerViewAdapter(reportList, currentSessionUsername);
 
         //Setting Adapter for RecyclerView
         myRecyclerview.setAdapter(myAdapter);

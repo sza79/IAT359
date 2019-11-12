@@ -1,5 +1,7 @@
 package com.example.milestone2;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,36 +10,39 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class profileEditActivity extends AppCompatActivity implements View.OnClickListener{
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private TextView usernameTextView, cardNumTextView, sexTextView, ageTextView, phoneTextView;
-    private Button editButton;
+    private TextView usernameTextView;
+    private EditText cardNumEditText, sexEditText, ageEditText, phoneEditText;
+    private Button doneButton;
 
     private MyUserDatabase userDb;
 
     public static final String DEFAULT = "not available";
 
+    private String currentSessionUsername;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_edit);
 
         usernameTextView = findViewById(R.id.usernameTextView);
-        cardNumTextView = findViewById(R.id.cardNumTextView);
-        sexTextView = findViewById(R.id.sexTextView);
-        ageTextView = findViewById(R.id.ageTextView);
-        phoneTextView = findViewById(R.id.phoneTextView);
+        cardNumEditText = findViewById(R.id.cardNumEditText);
+        sexEditText = findViewById(R.id.sexEditText);
+        ageEditText = findViewById(R.id.ageEditText);
+        phoneEditText = findViewById(R.id.phoneEditText);
 
-        editButton = findViewById(R.id.editButton);
-        editButton.setOnClickListener(this);
+        doneButton = findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(this);
 
         userDb = new MyUserDatabase(this);
 
         SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
-        String currentSessionUsername = prefs.getString( "CurrentSessionUsername", DEFAULT );
+        currentSessionUsername = prefs.getString( "CurrentSessionUsername", DEFAULT );
 
         //Retrieve reportList entries from database
         Cursor cursor = userDb.getDataByName(currentSessionUsername);
@@ -53,26 +58,24 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         while (!cursor.isAfterLast()) {
             Log.i("wow", "stuff changing, index 1 = " + cursor.getString(index1));
             usernameTextView.setText(cursor.getString(index1));
-            cardNumTextView.setText(cursor.getString(index2));
-            sexTextView.setText(cursor.getString(index3));
-            ageTextView.setText(cursor.getString(index4));
-            phoneTextView.setText(cursor.getString(index5));
+            cardNumEditText.setText(cursor.getString(index2));
+            sexEditText.setText(cursor.getString(index3));
+            ageEditText.setText(cursor.getString(index4));
+            phoneEditText.setText(cursor.getString(index5));
             cursor.moveToNext();
         }
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.editButton){
-            //EditButton Pressed
-            Intent i = new Intent( this, profileEditActivity.class );
-            startActivity(i);
-
+        if (v.getId() == R.id.doneButton) {
+            userDb.updateData(currentSessionUsername, cardNumEditText.getText().toString(), sexEditText.getText().toString(), ageEditText.getText().toString(), phoneEditText.getText().toString());
+            Intent refresh = new Intent(this, ProfileActivity.class);
+            startActivity(refresh);
+            this.finish();
         }
+
     }
 }

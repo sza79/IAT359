@@ -7,17 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class MyDatabase {
+public class MyBloodReportDatabase {
     private SQLiteDatabase db;
     private Context context;
     public final MyHelper helper;
 
-    public MyDatabase (Context c){
+    public MyBloodReportDatabase(Context c){
         context = c;
         helper = new MyHelper(context);
     }
@@ -41,7 +40,7 @@ public class MyDatabase {
         contentValues.put(Constants.HEPATITISA, hepatitisA);
         contentValues.put(Constants.HEPATITISB, hepatitisB);
         //Put More
-        long id = db.insert(Constants.TABLE_NAME, null, contentValues);
+        long id = db.insert(Constants.BLOODTABLE_NAME, null, contentValues);
         if (id < 0)
         {
             Log.i("wow", "Insert Failed");
@@ -60,7 +59,7 @@ public class MyDatabase {
         String[] columns = {Constants.PATIENTNAME, Constants.DATE, Constants.BLOODTYPE, Constants.RBC, Constants.WBC, Constants.HEPATITISA, Constants.HEPATITISB};
 
         String selection = Constants.PATIENTNAME + "='" + patientName + "'";
-        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
+        Cursor cursor = db.query(Constants.BLOODTABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
     }
 
