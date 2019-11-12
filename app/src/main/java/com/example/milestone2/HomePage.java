@@ -60,7 +60,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
         }
 
         if (v.getId() == R.id.reportButton) {
-            Intent i = new Intent( this, ReportActivity.class );
+            Intent i = new Intent( this, ReportChoosing.class );
             startActivity( i );
         }
 
