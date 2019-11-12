@@ -7,12 +7,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -59,6 +62,8 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
         } catch (Exception e) {
             Log.i("wow", e.toString());
         }
+
+        v.vibrate(VibrationEffect.createOneShot(5000, VibrationEffect.DEFAULT_AMPLITUDE));
 
     }
 
@@ -112,7 +117,13 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
                     long timeDifference = newTime - previousTime;
                     if (timeDifference < 5) {
                         walkingStatus.setImageResource(R.drawable.toofast);
-                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            //Vibrate for 5 seconds
+                            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            //deprecated in API 26 //Just in case you load this project in a lower version
+                            v.vibrate(500);
+                        }
                     } else {
                         walkingStatus.setImageResource(R.drawable.normal);
                     }
