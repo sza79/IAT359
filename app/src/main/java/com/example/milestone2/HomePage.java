@@ -55,7 +55,8 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
         }
 
         if (v.getId() == R.id.findStationButton) {
-
+            Intent i = new Intent( this, MapActivity.class );
+            startActivity( i );
         }
 
         if (v.getId() == R.id.reportButton) {
