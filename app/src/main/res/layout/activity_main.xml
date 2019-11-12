@@ -17,12 +17,13 @@
 
     <EditText
         android:id="@+id/name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
         android:hint="Username"
-        android:textColorHint="#ffff"
-        android:layout_centerHorizontal="true"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content" />
+        android:textColor="#ffff"
+        android:textColorHint="#ffff" />
 
     <EditText
         android:id="@+id/password"
@@ -31,6 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="320dp"
         android:hint="Password"
+        android:textColor="#ffff"
         android:textColorHint="#ffff" />
 
 
