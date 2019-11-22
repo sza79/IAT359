@@ -14,6 +14,7 @@ public class Constants {
     public static final int DATABASE_VERSION = 1;
 
     public static final String USERTABLE_NAME = "users";
+    public static final String PASSWORD = "password";
     public static final String CARDNUM = "cardNumber";
     public static final String SEX = "sex";
     public static final String AGE = "age";

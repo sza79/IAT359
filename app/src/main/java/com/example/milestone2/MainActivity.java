@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
 
         //Insert Data
-        userDb.insertData(user.getText().toString(), "-", "-", "-", "-");
+        userDb.insertData(user.getText().toString(), pass.getText().toString(), "-", "-", "-", "-");
 
         //create intent for an external application by using start activity
         Toast.makeText( this, "go to Log in interface", Toast.LENGTH_LONG ).show();

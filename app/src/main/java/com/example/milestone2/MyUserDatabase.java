@@ -28,11 +28,12 @@ public class MyUserDatabase {
         return dateFormat.format(date);
     }
 
-    public long insertData (String patientName, String cardNum, String sex, String age, String phone)
+    public long insertData (String patientName, String password, String cardNum, String sex, String age, String phone)
     {
         db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Constants.PATIENTNAME, patientName);
+        contentValues.put(Constants.PASSWORD, password);
         contentValues.put(Constants.CARDNUM, cardNum);
         contentValues.put(Constants.SEX, sex);
         contentValues.put(Constants.AGE, age);
@@ -65,7 +66,7 @@ public class MyUserDatabase {
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {Constants.PATIENTNAME, Constants.CARDNUM, Constants.SEX, Constants.AGE, Constants.PHONE};
+        String[] columns = {Constants.PATIENTNAME, Constants.PASSWORD, Constants.CARDNUM, Constants.SEX, Constants.AGE, Constants.PHONE};
 
         String selection = Constants.PATIENTNAME + "='" + patientName + "'";
         Cursor cursor = db.query(Constants.USERTABLE_NAME, columns, selection, null, null, null, null);

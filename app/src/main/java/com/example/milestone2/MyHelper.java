@@ -27,6 +27,7 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.USERTABLE_NAME + " (" +
                     Constants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     Constants.PATIENTNAME + " TEXT, " +
+                    Constants.PASSWORD + " TEXT, " +
                     Constants.CARDNUM + " TEXT, " +
                     Constants.SEX + " TEXT, " +
                     Constants.AGE + " TEXT, " +

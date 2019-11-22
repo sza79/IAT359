@@ -64,8 +64,6 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
             phoneEditText.setText(cursor.getString(index5));
             cursor.moveToNext();
         }
-
-
     }
 
     @Override
