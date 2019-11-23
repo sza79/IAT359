@@ -85,7 +85,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         }
 
         firstHospital = map.addMarker(new MarkerOptions()
-                .position(new LatLng(49.176088, -122.842598))
+                .position(new LatLng(49.176088, -122.842598 ))
 //                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.surrey_memorial_hospital))
                 .snippet("Publicly funded hospital owned and operated by Fraser Health&13750 96 Ave, Surrey, BC V3V 1Z2")
                 .title("Surrey Memorial Hospital"));

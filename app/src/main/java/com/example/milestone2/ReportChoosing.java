@@ -41,8 +41,9 @@ public class ReportChoosing extends AppCompatActivity {
 
         //Retrieve reportList entries from database
         bloodDb = new MyBloodReportDatabase(this);
-        Cursor cursor = bloodDb.getReportsByName("MyNameIsWOW");
+        Cursor cursor = bloodDb.getReportsByName("April Zhang");
 
+        int index0 = cursor.getColumnIndex(Constants.UID);
         int index1 = cursor.getColumnIndex(Constants.PATIENTNAME);
         int index2 = cursor.getColumnIndex(Constants.DATE);
         int index3 = cursor.getColumnIndex(Constants.BLOODTYPE);
@@ -53,6 +54,7 @@ public class ReportChoosing extends AppCompatActivity {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
+            String uid = cursor.getString(index0);
             String patientName = cursor.getString(index1);
             String date = cursor.getString(index2);
             String bloodType = cursor.getString(index3);
@@ -61,7 +63,7 @@ public class ReportChoosing extends AppCompatActivity {
             String hepatitisA = cursor.getString(index6);
             String hepatitisB = cursor.getString(index7);
 
-            String s = patientName + "," + date + "," + bloodType + "," + wbc + "," + rbc + "," + hepatitisA + "," + hepatitisB;
+            String s = uid + "," + patientName + "," + date + "," + bloodType + "," + wbc + "," + rbc + "," + hepatitisA + "," + hepatitisB;
             reportList.add(s);
             cursor.moveToNext();
         }

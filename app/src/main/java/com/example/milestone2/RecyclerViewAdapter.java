@@ -37,10 +37,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //Gonna have to do some splitToken afterwards here
         String[] split = bloodReportTitle.split(",");
         holder.reportTitle.setText(currentSessionUsername);
-        holder.reportDate.setText(split[1]);
+        holder.reportDate.setText(split[2]);
         //Position is bind to the item, so that onClickListener knows which item is clicked
         //Used later to retrieve the clicked sensor
         holder.myPosition = position;
+        holder.UID = split[0];
+
     }
 
     @Override
@@ -57,14 +59,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //myPosition represents the position of this viewHolder within the RecyclerView
         public int myPosition;
 
+        //time String used to retrieve a suitable report
+        public String UID;
+
         //Context used for Intents
         Context context;
 
         //Constructor class
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
 
             reportTitle = itemView.findViewById(R.id.reportTitle);
             reportDate = itemView.findViewById(R.id.reportDate);
@@ -78,9 +81,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View v) {
             //Send user to the detail page with the position of the clicked viewHolder as Extra
-            Intent ToSensorDetail = new Intent(context, ReportActivity.class);
-            ToSensorDetail.putExtra("position", myPosition);
-            context.startActivity(ToSensorDetail);
+            Intent ToBloodReportDetail = new Intent(context, ReportActivity.class);
+            ToBloodReportDetail.putExtra("position", myPosition);
+            ToBloodReportDetail.putExtra("uid", UID);
+            context.startActivity(ToBloodReportDetail);
         }
     }
 }

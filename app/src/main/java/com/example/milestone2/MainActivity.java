@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,10 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
         userDb = new MyUserDatabase(this);
 
+//        double randomRBC = Float.valueOf(String.format("%.2f", (4.50f + Math.random() * (1.00f))));
+//        double randomWBC = Float.valueOf(String.format("%.2f", (4.50f + Math.random() * (1.00f))));
+
+        double randomRBC = new BigDecimal(4.50f + Math.random() * (1.00f)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        double randomWBC = new BigDecimal(4.50f + Math.random() * (1.00f)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+
         //Insert Data
         // patientName, bloodType, wbc, rbc, hepatitisA, hepatitisB
         //For now, timestamp is generated automatically with current system time
-        bloodDb.insertData("MyNameIsWOW", "B+", "555", "22210", false, false);
+        bloodDb.insertData("April Zhang", "B+", String.valueOf(randomRBC), String.valueOf(randomWBC), false, false);
 
 //        //Get Data
 //        Cursor cursor = bloodDb.getReportsByName("MyNameIsWOW");

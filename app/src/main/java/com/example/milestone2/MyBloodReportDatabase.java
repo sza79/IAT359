@@ -56,7 +56,7 @@ public class MyBloodReportDatabase {
     {
         //select plants from database of type 'herb'
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {Constants.PATIENTNAME, Constants.DATE, Constants.BLOODTYPE, Constants.RBC, Constants.WBC, Constants.HEPATITISA, Constants.HEPATITISB};
+        String[] columns = {Constants.UID, Constants.PATIENTNAME, Constants.DATE, Constants.BLOODTYPE, Constants.RBC, Constants.WBC, Constants.HEPATITISA, Constants.HEPATITISB};
 
         String selection = Constants.PATIENTNAME + "='" + patientName + "'";
         Cursor cursor = db.query(Constants.BLOODTABLE_NAME, columns, selection, null, null, null, null);
