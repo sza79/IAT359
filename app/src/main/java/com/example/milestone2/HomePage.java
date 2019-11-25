@@ -33,14 +33,24 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
 
         usernameTextView.setText(currentSessionUsername);
 
+
+        //icon USER
         iconButton = findViewById(R.id.iconButton);
         iconButton.setOnClickListener(this);
+
+        //search map
         findStationButton = findViewById(R.id.findStationButton);
         findStationButton.setOnClickListener(this);
+
+        //report
         reportButton = findViewById(R.id.reportButton);
         reportButton.setOnClickListener(this);
+
+        //accomplishment
         accomplishmentButton = findViewById(R.id.accomplishmentButton);
         accomplishmentButton.setOnClickListener(this);
+
+        //step count
         monitorButton = findViewById(R.id.monitorButton);
         monitorButton.setOnClickListener(this);
 
@@ -48,7 +58,11 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     }
 
     @Override
+
+    //when clicked
     public void onClick(View v) {
+
+
         if (v.getId() == R.id.iconButton) {
             Intent i = new Intent( this, ProfileActivity.class );
             startActivity( i );

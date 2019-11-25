@@ -22,9 +22,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
+
+    //initialize googlemap
     GoogleMap map;
     private Marker firstHospital;
     private Marker secondSpot;
+
+
 
     private static final String[] LOCATION_PERMS={
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -45,9 +49,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     }
 
     @Override
+    //setting map
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
+        //asking for permission
         requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
 
         LatLng surreySFU = new LatLng(49.1867, -122.8494);

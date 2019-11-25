@@ -35,10 +35,8 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
         sexEditText = findViewById(R.id.sexEditText);
         ageEditText = findViewById(R.id.ageEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
-
         doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
-
         userDb = new MyUserDatabase(this);
 
         SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
@@ -53,7 +51,6 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
         int index5 = cursor.getColumnIndex(Constants.PHONE);
 
         Log.i("wow", "Current Session Name = " + currentSessionUsername);
-
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Log.i("wow", "stuff changing, index 1 = " + cursor.getString(index1));

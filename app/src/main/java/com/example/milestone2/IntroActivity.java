@@ -3,8 +3,6 @@ package com.example.milestone2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,21 +57,21 @@ public class IntroActivity extends AppCompatActivity {
 
         // hide the action bar
 
-        getSupportActionBar().hide();
+
 
         // ini views
         btnNext = findViewById(R.id.btn_next);
         btnGetStarted = findViewById(R.id.btn_get_started);
         tabIndicator = findViewById(R.id.tab_indicator);
-        btnAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_animation);
+        btnAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_animation);
         tvSkip = findViewById(R.id.tv_skip);
 
         // fill list screen
 
         final List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Donate Blood","Thanks for using LifeGift! We provide the quickest and easiest to understand blood donating experience!",R.drawable.blood1));
-        mList.add(new ScreenItem("Blood Tracking","Updates anytime, anywhere on who your blood has helped and how!",R.drawable.trackicon));
-        mList.add(new ScreenItem("Health Report"," Access your personal health report from each donation any time anywhere to keep yourself updated on your health!",R.drawable.reporticon));
+        mList.add(new ScreenItem("Donate Blood","Thanks for using LifeGift! We provide the quickest and easiest to understand blood donating experience!", R.drawable.blood1));
+        mList.add(new ScreenItem("Blood Tracking","Updates anytime, anywhere on who your blood has helped and how!", R.drawable.trackicon));
+        mList.add(new ScreenItem("Health Report"," Access your personal health report from each donation any time anywhere to keep yourself updated on your health!", R.drawable.reporticon));
 
         // setup viewpager
         screenPager =findViewById(R.id.screen_viewpager);
@@ -151,7 +149,7 @@ public class IntroActivity extends AppCompatActivity {
 
                 //open main activity
 
-                Intent mainActivity = new Intent(getApplicationContext(),MainActivity.class);
+                Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(mainActivity);
                 // also we need to save a boolean value to storage so next time when the user run the app
                 // we could know that he is already checked the intro screen activity

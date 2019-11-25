@@ -1,5 +1,6 @@
 package com.example.milestone2;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -44,6 +45,7 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
     //SensorValues float Array to store the sensor values read
     private float[] rawSensorValues;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +85,7 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onSensorChanged(SensorEvent event) {
         Sensor sensor = event.sensor;
@@ -123,6 +126,7 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
                     if (timeDifference < 5) {
                         walkingStatus.setImageResource(R.drawable.toofast);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
                             //Vibrate for 5 seconds
                             v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                         } else {
