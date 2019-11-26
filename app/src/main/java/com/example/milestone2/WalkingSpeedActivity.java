@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,6 +36,8 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
 
     private long previousTime = 0;
     private long newTime = 0;
+
+    private long timeDifference = 0;
 
     //The step counter
     private Sensor stepCounter;
@@ -82,6 +86,11 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
         super.onPause();
     }
 
+    protected double toMeterPerSecond(long secondsPer10Step) {
+        double temp = 1.312/(secondsPer10Step * 0.1);
+        return temp;
+    }
+
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -95,11 +104,6 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
 
         if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
             steps++;
-        }
-
-        //Every 10 steps
-        if (steps % 10 == 0) {
-
         }
 
         Log.i("wow", "Step : " + steps);
@@ -119,7 +123,7 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
                     previousTime = newTime;
                     newTime = System.currentTimeMillis() / 1000;
                     Log.i("wow", "Previous Time = " + previousTime + ", New Time = " + newTime);
-                    long timeDifference = newTime - previousTime;
+                    timeDifference = newTime - previousTime;
                     if (timeDifference < 5) {
                         walkingStatus.setImageResource(R.drawable.toofast);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -133,6 +137,9 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
                         walkingStatus.setImageResource(R.drawable.normal);
                     }
                 }
+                double tempMPS = toMeterPerSecond(timeDifference);
+                double textViewOutput = new BigDecimal(tempMPS).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                speedTextView.setText(String.valueOf(textViewOutput));
             }
         } catch (Exception e) {
             Log.i("wow", e.toString());
