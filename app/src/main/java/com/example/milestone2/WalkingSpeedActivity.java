@@ -156,6 +156,11 @@ public class WalkingSpeedActivity extends AppCompatActivity implements SensorEve
 
     }
 
+    //Implicit Intent Used
+    //If "Learn More" button is clicked, we use implicit intent to open a link
+    //This is implicit because we have only declared the url for the device to open,
+    //But did not declare which app or process the device should start
+    //The device/user can decide which browser they want to open the link with
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.linkToExternal) {

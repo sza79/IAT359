@@ -14,14 +14,15 @@ import java.util.List;
 
 public class IntroViewPagerAdapter extends PagerAdapter {
 
-   Context mContext ;
-   List<ScreenItem> mListScreen;
+    //Variables
+    Context mContext ;
+    List<ScreenItem> mListScreen;
 
+    //Constructor
     public IntroViewPagerAdapter(Context mContext, List<ScreenItem> mListScreen) {
         this.mContext = mContext;
         this.mListScreen = mListScreen;
     }
-
 
     @NonNull
     @Override
@@ -41,11 +42,6 @@ public class IntroViewPagerAdapter extends PagerAdapter {
         container.addView(layoutScreen);
 
         return layoutScreen;
-
-
-
-
-
     }
 
     @Override
@@ -60,8 +56,6 @@ public class IntroViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-
         container.removeView((View)object);
-
     }
 }

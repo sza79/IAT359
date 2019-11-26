@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener{
 
+    //Variables
     private TextView usernameTextView;
     private Button findStationButton;
     private ImageView iconButton, reportButton, accomplishmentButton, monitorButton;
 
+    //String to present when SharedPreference Retrieval Result is not present
     public static final String DEFAULT = "not available";
 
     @Override
@@ -26,13 +28,17 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Get Reference to UI TextView
         usernameTextView = findViewById(R.id.usernameTextView);
 
+        //Retrieving Current Session Logged-In User
         SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
         String currentSessionUsername = prefs.getString( "CurrentSessionUsername", DEFAULT );
 
+        //Set currentSessionUsername onto WelcomeTextuView
         usernameTextView.setText(currentSessionUsername);
 
+        //Buttons:
 
         //icon USER
         iconButton = findViewById(R.id.iconButton);
@@ -62,7 +68,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     //when clicked
     public void onClick(View v) {
 
-
+        //Explicit Intent to transfer user to the next page
         if (v.getId() == R.id.iconButton) {
             Intent i = new Intent( this, ProfileActivity.class );
             startActivity( i );

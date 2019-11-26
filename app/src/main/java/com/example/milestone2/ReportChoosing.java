@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+//RecyclerView Page to select Report
 public class ReportChoosing extends AppCompatActivity {
 
     private RecyclerView myRecyclerview;
@@ -67,13 +68,6 @@ public class ReportChoosing extends AppCompatActivity {
             reportList.add(s);
             cursor.moveToNext();
         }
-//        Log.i("wow", "First Element is : " + mArrayList.get(0));
-//
-//        //Print the Data found with the name
-//        for (String e : mArrayList) {
-//            Log.i("wow", e);
-//        }
-
 
         //RecyclerView Adapter Instantiation with the ArrayList
         myAdapter = new RecyclerViewAdapter(reportList, currentSessionUsername);

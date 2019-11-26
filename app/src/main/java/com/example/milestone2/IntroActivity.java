@@ -21,6 +21,7 @@ import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
 
+    //Variables
     private ViewPager screenPager;
     IntroViewPagerAdapter introViewPagerAdapter ;
     TabLayout tabIndicator;
@@ -30,34 +31,23 @@ public class IntroActivity extends AppCompatActivity {
     Animation btnAnim ;
     TextView tvSkip;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // make the activity on full screen
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         // when this activity is about to be launch we need to check if its openened before or not
-//
 //        if (restorePrefData()) {
-//
 //            Intent mainActivity = new Intent(getApplicationContext(),MainActivity.class );
 //            startActivity(mainActivity);
 //            finish();
-//
-//
 //        }
 
         setContentView(R.layout.activity_intro);
-
-        // hide the action bar
-
-
 
         // ini views
         btnNext = findViewById(R.id.btn_next);
@@ -93,21 +83,13 @@ public class IntroActivity extends AppCompatActivity {
 
                     position++;
                     screenPager.setCurrentItem(position);
-
-
                 }
-
                 if (position == mList.size()-1) { // when we rech to the last screen
 
                     // TODO : show the GETSTARTED Button and hide the indicator and the next button
 
                     loaddLastScreen();
-
-
                 }
-
-
-
             }
         });
 
@@ -119,36 +101,23 @@ public class IntroActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if (tab.getPosition() == mList.size()-1) {
-
                     loaddLastScreen();
-
                 }
-
-
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
-
-
         // Get Started button click listener
-
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 //open main activity
-
                 Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(mainActivity);
                 // also we need to save a boolean value to storage so next time when the user run the app
@@ -156,49 +125,33 @@ public class IntroActivity extends AppCompatActivity {
                 // i'm going to use shared preferences to that process
                 savePrefsData();
                 finish();
-
-
-
             }
         });
 
         // skip button click listener
-
         tvSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 screenPager.setCurrentItem(mList.size());
             }
         });
-
-
-
     }
 
     private boolean restorePrefData() {
-
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
         Boolean isIntroActivityOpnendBefore = pref.getBoolean("isIntroOpnend",false);
         return  isIntroActivityOpnendBefore;
-
-
-
     }
 
     private void savePrefsData() {
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean("isIntroOpnend",true);
         editor.commit();
-
-
     }
 
     // show the GETSTARTED Button and hide the indicator and the next button
     private void loaddLastScreen() {
-
         btnNext.setVisibility(View.INVISIBLE);
         btnGetStarted.setVisibility(View.VISIBLE);
         tvSkip.setVisibility(View.INVISIBLE);
@@ -206,8 +159,5 @@ public class IntroActivity extends AppCompatActivity {
         // TODO : ADD an animation the getstarted button
         // setup animation
         btnGetStarted.setAnimation(btnAnim);
-
-
-
     }
 }

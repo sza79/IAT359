@@ -10,9 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-
+//Activity to show Blood Report Data
 public class ReportActivity extends AppCompatActivity  {
 
+    //Variables
     private MyBloodReportDatabase bloodDb;
     private String myUid;
     private String[] myReportData;
@@ -23,6 +24,7 @@ public class ReportActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
+        //UI References
         timeTV = findViewById(R.id.timeTV);
         bloodTypeTV = findViewById(R.id.bloodTypeTV);
         rbcTV = findViewById(R.id.rbcTV);
@@ -30,16 +32,21 @@ public class ReportActivity extends AppCompatActivity  {
         hepaATV = findViewById(R.id.hepaATV);
         hepaBTV = findViewById(R.id.hepaBTV);
 
+        //Retrieve the uid from Intent Extra
+        //If there is, uid is sent from the last activity, with the id of the clicked report
+        //The id is then used to retieve a specific blood report record in the database
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             myUid = extras.getString("uid");
         }
 
+        //Initializing the Blood Report Database
         bloodDb = new MyBloodReportDatabase(this);
 
         //Get Data
         Cursor cursor = bloodDb.getReportsByName("April Zhang");
 
+        //All the columns that we are getting, we get the index number of it
         int index0 = cursor.getColumnIndex(Constants.UID);
         int index1 = cursor.getColumnIndex(Constants.PATIENTNAME);
         int index2 = cursor.getColumnIndex(Constants.DATE);
@@ -49,6 +56,7 @@ public class ReportActivity extends AppCompatActivity  {
         int index6 = cursor.getColumnIndex(Constants.HEPATITISA);
         int index7 = cursor.getColumnIndex(Constants.HEPATITISB);
 
+        //Retrieving the data by Cursor looping through
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String uid = cursor.getString(index0);
@@ -60,19 +68,19 @@ public class ReportActivity extends AppCompatActivity  {
             String hepatitisA = cursor.getString(index6);
             String hepatitisB = cursor.getString(index7);
 
-
+            //Construct the data into a string separated by ","
             String tempString = uid + "," + patientName + "," + date + "," + bloodType + "," + wbc + "," + rbc + "," + hepatitisA + "," + hepatitisB;
+
+            //Splitting out the uid from the string to check if the record is the one we are searching for
             String[] splittedTempString = tempString.split(",");
-            Log.i("wow", splittedTempString[0] + " " + myUid);
+            //Compare with the uid we retrieved from the Intent Extra
             if (splittedTempString[0].equals(myUid)) {
                 myReportData = splittedTempString;
             }
-
             cursor.moveToNext();
         }
 
-//        Log.i("wow", myReportData[0] + " " + myReportData[1]+ " " + myReportData[2]+ " " + myReportData[3]+ " " + myReportData[4]+ " " + myReportData[5]+ " " + myReportData[6]+ " " + myReportData[7]);
-
+        //If the report is filled with at least one result, we set the conent of the views in report browsing page
         if (myReportData[0] != null) {
             timeTV.setText(myReportData[2]);
             bloodTypeTV.setText(myReportData[3]);

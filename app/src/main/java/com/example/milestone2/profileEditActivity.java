@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+//Editing User Profile Information
 public class profileEditActivity extends AppCompatActivity implements View.OnClickListener{
 
+    //Variables
     private TextView usernameTextView;
     private EditText cardNumEditText, sexEditText, ageEditText, phoneEditText;
     private Button doneButton;
@@ -30,6 +32,7 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
 
+        //UI References
         usernameTextView = findViewById(R.id.usernameTextView);
         cardNumEditText = findViewById(R.id.cardNumEditText);
         sexEditText = findViewById(R.id.sexEditText);
@@ -39,6 +42,7 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
         doneButton.setOnClickListener(this);
         userDb = new MyUserDatabase(this);
 
+        //Retrieving the current Session's username
         SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
         currentSessionUsername = prefs.getString( "CurrentSessionUsername", DEFAULT );
 
@@ -50,10 +54,8 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
         int index4 = cursor.getColumnIndex(Constants.AGE);
         int index5 = cursor.getColumnIndex(Constants.PHONE);
 
-        Log.i("wow", "Current Session Name = " + currentSessionUsername);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Log.i("wow", "stuff changing, index 1 = " + cursor.getString(index1));
             usernameTextView.setText(cursor.getString(index1));
             cardNumEditText.setText(cursor.getString(index2));
             sexEditText.setText(cursor.getString(index3));
@@ -63,6 +65,7 @@ public class profileEditActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    //When done is clicked, go back to previous activity
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.doneButton) {

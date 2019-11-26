@@ -7,9 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+//Database Helper Class, creating and dropping tables
+//Used by other database Helper class to execute queries
 public class MyHelper extends SQLiteOpenHelper {
     private Context context;
 
+    //Create Blood Report Database Query
     public static final String CREATE_BLOODTABLE =
             "CREATE TABLE "+
                     Constants.BLOODTABLE_NAME + " (" +
@@ -22,6 +25,7 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.HEPATITISA + " BOOLEAN, " +
                     Constants.HEPATITISB + " BOOLEAN);" ;
 
+    //Create User Database Query
     public static final String CREATE_USERTABLE =
             "CREATE TABLE "+
                     Constants.USERTABLE_NAME + " (" +
@@ -33,13 +37,16 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.AGE + " TEXT, " +
                     Constants.PHONE + " TEXT);" ;
 
+    //Drop Table Query, not really used
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.BLOODTABLE_NAME;
 
+    //Constructor
     public MyHelper(Context context){
         super (context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
         this.context = context;
     }
 
+    //When started, run the create queries
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
@@ -54,6 +61,7 @@ public class MyHelper extends SQLiteOpenHelper {
         }
     }
 
+    //Upgrade databsae structure
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {

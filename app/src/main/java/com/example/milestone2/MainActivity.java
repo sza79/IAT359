@@ -42,51 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
         userDb = new MyUserDatabase(this);
 
-//        double randomRBC = Float.valueOf(String.format("%.2f", (4.50f + Math.random() * (1.00f))));
-//        double randomWBC = Float.valueOf(String.format("%.2f", (4.50f + Math.random() * (1.00f))));
-
+        //Round up the two randomized number to the closest 2 decimal place using BigDecimal Class
+        //Learned from https://www.mkyong.com/java/how-to-round-double-float-value-to-2-decimal-points-in-java/
         double randomRBC = new BigDecimal(4.50f + Math.random() * (1.00f)).setScale(2, RoundingMode.HALF_UP).doubleValue();
         double randomWBC = new BigDecimal(4.50f + Math.random() * (1.00f)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
+        //For now, we are faking the data
+        //We insert a randomized blood report everytime the program start
+        //Here is the insert query
         //Insert Data
         // patientName, bloodType, wbc, rbc, hepatitisA, hepatitisB
         //For now, timestamp is generated automatically with current system time
         bloodDb.insertData("April Zhang", "B+", String.valueOf(randomRBC), String.valueOf(randomWBC), false, false);
-
-//        //Get Data
-//        Cursor cursor = bloodDb.getReportsByName("MyNameIsWOW");
-//
-//        int index1 = cursor.getColumnIndex(Constants.PATIENTNAME);
-//        int index2 = cursor.getColumnIndex(Constants.DATE);
-//        int index3 = cursor.getColumnIndex(Constants.BLOODTYPE);
-//        int index4 = cursor.getColumnIndex(Constants.WBC);
-//        int index5 = cursor.getColumnIndex(Constants.RBC);
-//        int index6 = cursor.getColumnIndex(Constants.HEPATITISA);
-//        int index7 = cursor.getColumnIndex(Constants.HEPATITISB);
-//
-//        ArrayList<String> mArrayList = new ArrayList<String>();
-//        cursor.moveToFirst();
-//        while (!cursor.isAfterLast()) {
-//            String patientName = cursor.getString(index1);
-//            String date = cursor.getString(index2);
-//            String bloodType = cursor.getString(index3);
-//            String wbc = cursor.getString(index4);
-//            String rbc = cursor.getString(index5);
-//            String hepatitisA = cursor.getString(index6);
-//            String hepatitisB = cursor.getString(index7);
-//
-//            String s = patientName + "," + date + "," + bloodType + "," + wbc + "," + rbc + "," + hepatitisA + "," + hepatitisB;
-//            mArrayList.add(s);
-//            cursor.moveToNext();
-//        }
-//        Log.i("wow", "First Element is : " + mArrayList.get(0));
-//
-//        //Print the Data found with the name
-//        for (String e : mArrayList) {
-//            Log.i("wow", e);
-//        }
-
-
     }
 
     public void Register(View view) {
@@ -96,14 +63,15 @@ public class MainActivity extends AppCompatActivity {
         //create editor object. using share preference to initialize that object call edit method
         SharedPreferences.Editor editor = register.edit();
 
+        //Retrieve the text entered from the UI
         String enteredUsername = user.getText().toString();
         String enteredPassword = pass.getText().toString();
 
-        //editor name
-        editor.putString( enteredUsername + "_username", user.getText().toString() );
-        editor.putString( enteredPassword + "_password", pass.getText().toString() );
-        Toast.makeText( this,"Save register information", Toast.LENGTH_LONG ).show();
-        editor.commit();
+        //Legacy code to register for the username and password, now we use sql database
+//        editor.putString( enteredUsername + "_username", user.getText().toString() );
+//        editor.putString( enteredPassword + "_password", pass.getText().toString() );
+//        Toast.makeText( this,"Save register information", Toast.LENGTH_LONG ).show();
+//        editor.commit();
 
         //Insert Data
         userDb.insertData(user.getText().toString(), pass.getText().toString(), "-", "-", "-", "-");
@@ -114,12 +82,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
     public void gotoLogin(View view) {
         //create intent for an external application by using start activity
         Toast.makeText( this, "go to Log in interface", Toast.LENGTH_LONG ).show();
         Intent i = new Intent( this, LoginActivity.class );
         startActivity(i);
-
     }
 }

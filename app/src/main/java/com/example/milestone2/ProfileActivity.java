@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//Profile activity showing the information of User
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
-
+    //Variables
     private TextView usernameTextView, cardNumTextView, sexTextView, ageTextView, phoneTextView;
     private Button editButton;
 
@@ -25,21 +26,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //UI Reference
         usernameTextView = findViewById(R.id.usernameTextView);
         cardNumTextView = findViewById(R.id.cardNumTextView);
         sexTextView = findViewById(R.id.sexTextView);
         ageTextView = findViewById(R.id.ageTextView);
         phoneTextView = findViewById(R.id.phoneTextView);
 
+        //Button Click Listener
         editButton = findViewById(R.id.editButton);
         editButton.setOnClickListener(this);
 
+        //Declaration of UserDatabase, used to retrieve user data
         userDb = new MyUserDatabase(this);
 
+        //Get the currently logged in user by using Shared Preference
         SharedPreferences prefs = getSharedPreferences( "Save Info", Context.MODE_PRIVATE );// initialize the shared preference
         String currentSessionUsername = prefs.getString( "CurrentSessionUsername", DEFAULT );
 
-        //Retrieve reportList entries from database
+        //Retrieve reportList entries from database by patient name retrieved from SharedPreference
         Cursor cursor = userDb.getDataByName(currentSessionUsername);
         int index1 = cursor.getColumnIndex(Constants.PATIENTNAME);
         int index2 = cursor.getColumnIndex(Constants.CARDNUM);
@@ -47,8 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         int index4 = cursor.getColumnIndex(Constants.AGE);
         int index5 = cursor.getColumnIndex(Constants.PHONE);
 
-        Log.i("wow", "Current Session Name = " + currentSessionUsername);
-
+        //Setting the TextView's value by the data retrieved
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Log.i("wow", "stuff changing, index 1 = " + cursor.getString(index1));
@@ -66,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onResume();
     }
 
+    //When Edit Button is clicked
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.editButton){

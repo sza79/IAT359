@@ -60,28 +60,25 @@ public class LoginActivity extends AppCompatActivity {
             cursor.moveToNext();
         }
 
-        //Legacy Login Credential Retrieval Code
-//        String userName = prefs.getString( enteredUsername + "_username",DEFAULT );
-//        String password = prefs.getString( enteredPassword + "_password",DEFAULT );
-
         /*if user sign in user name and password equal register information, the program will execute order to next interface.
         otherwise, the program will back to register interface.*/
 
-
+        //New Login Code using Database
         //If user name and password matches, go to home page
         if (userName.equals(enteredUsername) && !userName.isEmpty()){
             if (password.equals(enteredPassword)) {
+                //Shared Preference is Used
                 //If login successful, set current session username so that we can access username in other activities
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("CurrentSessionUsername", enteredUsername);
                 editor.commit();
 
-                //Lead user to Home Page
+                //Send user to Home Page
                 Toast.makeText(this, "Login Successful ", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, HomePage.class);
                 startActivity(i);
             } else {
-                //Username correct Password wrong
+                //Username correct BUT Password wrong
                 Toast.makeText(this, "Password incorrect, please try again ", Toast.LENGTH_SHORT).show();
             }
         }else{
@@ -90,6 +87,10 @@ public class LoginActivity extends AppCompatActivity {
             Intent i = new Intent( this,MainActivity.class );
             startActivity( i );
         }
+
+        //Legacy Login Credential Retrieval Code
+//        String userName = prefs.getString( enteredUsername + "_username",DEFAULT );
+//        String password = prefs.getString( enteredPassword + "_password",DEFAULT );
 
 //        //If user name and password matches, go to home page
 //        if (userName.equals( user.getText().toString() ) && password.equals( pass.getText().toString() )){
