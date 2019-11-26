@@ -12,6 +12,8 @@ import java.util.Locale;
 
 public class MyUserDatabase {
 
+
+
     private SQLiteDatabase db;
     private Context context;
     public final MyHelper helper;
@@ -19,6 +21,7 @@ public class MyUserDatabase {
     public MyUserDatabase(Context c){
         context = c;
         helper = new MyHelper(context);
+
     }
 
     private String getDateTime() {
@@ -72,4 +75,6 @@ public class MyUserDatabase {
         Cursor cursor = db.query(Constants.USERTABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
     }
+
+
 }
