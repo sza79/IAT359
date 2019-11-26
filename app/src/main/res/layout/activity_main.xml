@@ -36,36 +36,30 @@
         android:textColorHint="#ffff" />
 
 
-
     <Button
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:onClick="gotoLogin"
-        android:text="LogIn"
+        android:layout_marginTop="60dp"
         android:background="@drawable/buttonstyling"
+        android:onClick="Register"
+        android:text="Register"
         android:textColor="#ffffff">
 
     </Button>
 
-    <Button
-        android:layout_width="300dp"
+    <TextView
+        android:id="@+id/registerButton2"
+        android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/password"
-        android:text="Register"
-        android:textColor="#ffffff"
-        android:background="@drawable/buttonstyling"
-        android:onClick="Register">
-
-    </Button>
-
-
-
-
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:onClick="gotoLogin"
+        android:text="Already have an account? Login Here"
+        android:textColor="#B3FFFFFF"></TextView>
 
 
 </RelativeLayout>

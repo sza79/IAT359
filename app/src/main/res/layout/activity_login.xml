@@ -51,4 +51,16 @@
         android:background="@drawable/buttonstyling"
         android:textColor="#ffffff"></Button>
 
+    <TextView
+        android:id="@+id/registerButton"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:onClick="goToRegister"
+        android:text="Haven't Join Us? Register Here"
+        android:textColor="#B3FFFFFF"></TextView>
+
 </RelativeLayout>

@@ -77,14 +77,12 @@ public class MainActivity extends AppCompatActivity {
         userDb.insertData(user.getText().toString(), pass.getText().toString(), "-", "-", "-", "-");
 
         //create intent for an external application by using start activity
-        Toast.makeText( this, "go to Log in interface", Toast.LENGTH_LONG ).show();
         Intent i = new Intent( this, LoginActivity.class );
         startActivity(i);
     }
 
     public void gotoLogin(View view) {
         //create intent for an external application by using start activity
-        Toast.makeText( this, "go to Log in interface", Toast.LENGTH_LONG ).show();
         Intent i = new Intent( this, LoginActivity.class );
         startActivity(i);
     }

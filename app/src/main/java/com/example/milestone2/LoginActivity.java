@@ -37,6 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         userDb = new MyUserDatabase(this);
     }
 
+    public void goToRegister(View view) {
+        //Send user to Register Page
+        Intent i = new Intent( this, MainActivity.class );
+        startActivity(i);
+    }
+
     //create log in button, when user sign in username and password is correct, the program will execute order to next interface
     public void Login(View view) {
         //Get SharedPreferences
@@ -84,8 +90,6 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             //else return to the login page,(main activity)
             Toast.makeText( this,"User not registered, please register", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent( this,MainActivity.class );
-            startActivity( i );
         }
 
         //Legacy Login Credential Retrieval Code
